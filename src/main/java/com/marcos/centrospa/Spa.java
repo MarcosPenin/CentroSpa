@@ -7,9 +7,14 @@ public class Spa {
     
     private String CIF;
     private String nombre;
-    private ArrayList<> Actividades;
-    private ArrayList<> Socios;
+    private ArrayList<Actividad> actividades;
+    private ArrayList<Socio> socios;
 
+    public Spa(String CIF, String nombre){
+        this.CIF=CIF;
+        this.nombre=nombre;
+    }
+    
     /**
      * @return the CIF
      */
@@ -39,33 +44,37 @@ public class Spa {
     }
 
     /**
-     * @return the Actividades
+     * @return the actividades
      */
-    public ArrayList<> getActividades() {
-        return Actividades;
+    public ArrayList<Actividad> getActividades() {
+        return actividades;
     }
 
     /**
-     * @param Actividades the Actividades to set
+     * @param actividades the actividades to set
      */
-    public void setActividades(ArrayList<> Actividades) {
-        this.Actividades = Actividades;
+    public void setActividades(ArrayList<Actividad> actividades) {
+        this.actividades = actividades;
     }
 
     /**
-     * @return the Socios
+     * @return the socios
      */
-    public ArrayList<> getSocios() {
-        return Socios;
+    public ArrayList<Socio> getSocios() {
+        return socios;
     }
 
     /**
-     * @param Socios the Socios to set
+     * @param socios the socios to set
      */
-    public void setSocios(ArrayList<> Socios) {
-        this.Socios = Socios;
+    public void setSocios(ArrayList<Socio> socios) {
+        this.socios = socios;
     }
-    
     
     
 }
+
+    /**
+     * @return the Actividades
+     */
+  
