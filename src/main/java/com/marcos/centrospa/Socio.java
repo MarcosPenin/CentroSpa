@@ -8,8 +8,8 @@ public class Socio {
     private String nombre;
     private float cuotaFija;
     private float cuotaExtra;
-    private ArrayList<Actividad> actividades;
-    private ArrayList<Uso> usos;
+    private ArrayList<Actividad> actividades=new ArrayList();
+    private ArrayList<Uso> usos=new ArrayList();
 
     public Socio(String codigo, String nombre, float cuotaFija) {
         this.codigo = codigo;

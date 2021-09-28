@@ -7,8 +7,8 @@ public class Spa {
     
     private String CIF;
     private String nombre;
-    private ArrayList<Actividad> actividades;
-    private ArrayList<Socio> socios;
+    private ArrayList<Actividad> actividades=new ArrayList();
+    private ArrayList<Socio> socios=new ArrayList();
 
     public Spa(String CIF, String nombre){
         this.CIF=CIF;
@@ -74,7 +74,4 @@ public class Spa {
     
 }
 
-    /**
-     * @return the Actividades
-     */
-  
+   
