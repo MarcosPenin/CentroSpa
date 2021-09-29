@@ -1,22 +1,21 @@
-
 package com.marcos.centrospa;
 
 import java.sql.Time;
 import java.util.Date;
 
 public class Uso {
-    
+
     private Actividad actividad;
     private Date fecha;
     private Time horaInicio;
     private Time horaFin;
-    private float importe;
-    
-    public Uso(Actividad actividad, Date fecha, Time horaInicio, Time horaFin){
-        this.actividad=actividad;
-        this.fecha=fecha;
-        this.horaInicio=horaInicio;
-        this.horaFin=horaFin;
+    private float importeTotal;
+
+    public Uso(Actividad actividad, Date fecha, Time horaInicio, Time horaFin) {
+        this.actividad = actividad;
+        this.fecha = fecha;
+        this.horaInicio = horaInicio;
+        this.horaFin = horaFin;
     }
 
     /**
@@ -74,31 +73,18 @@ public class Uso {
     public void setHoraFin(Time horaFin) {
         this.horaFin = horaFin;
     }
-   
-    /**
-     * @return the importe
-     */
-    public float getImporte() {
-        return importe;
-    }
 
     /**
-     * @param importe the importe to set
+     * @return the importeTotal
      */
-    public void setImporte(float importe) {
-        this.importe = importe;
-    }
-    
-     
-    public float calcularImporte(){
-        
-        this.importe=this.actividad.getCuota()*(this.horaFin.toLocalTime().getHour()-this.horaInicio.toLocalTime().getHour());       
-        return importe;
+    public float getImporteTotal() {
+        return importeTotal;
     }
 
-    
-    
-    
-    
-    
+    public float calcularImporte() {
+
+        this.importeTotal = this.actividad.getCuota() * (this.horaFin.toLocalTime().getHour() - this.horaInicio.toLocalTime().getHour());
+        return importeTotal;
+    }
+
 }

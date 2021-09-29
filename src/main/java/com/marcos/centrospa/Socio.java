@@ -8,13 +8,21 @@ public class Socio {
     private String nombre;
     private float cuotaFija;
     private float cuotaExtra;
-    private ArrayList<Actividad> actividades=new ArrayList();
-    private ArrayList<Uso> usos=new ArrayList();
+    private ArrayList<Actividad> actividades = new ArrayList();
+    private ArrayList<Uso> usos = new ArrayList();
 
     public Socio(String codigo, String nombre, float cuotaFija) {
         this.codigo = codigo;
         this.nombre = nombre;
         this.cuotaFija = cuotaFija;
+    }
+
+    public void añadirActividad(Actividad actividad) {
+        this.actividades.add(actividad);
+    }
+
+    public void añadirUso(Uso uso) {
+        this.usos.add(uso);
     }
 
     /**
@@ -94,14 +102,18 @@ public class Socio {
         return cuotaExtra;
     }
 
-    public float calcularCuotaExtra(){
-        float cuotaExtra=0;
-        for(int i=0;i<=this.getUsos().size();i++){
-            cuotaExtra+=this.getUsos().get(i).calcularImporte();
+    public float calcularCuotaExtra() {
+        float cuotaExtra = 0;
+        for (int i = 0; i <= this.getUsos().size(); i++) {
+            cuotaExtra += this.getUsos().get(i).calcularImporte();
         }
-        return cuotaExtra;        
-        
+        return cuotaExtra;
+
     }
 
+    @Override
+    public String toString() {
+        return "Socio{" + "codigo=" + codigo + ", nombre=" + nombre + ", cuotaFija=" + cuotaFija + ", cuotaExtra=" + cuotaExtra + ", actividades=" + actividades + ", usos=" + usos + '}';
+    }
 
 }
