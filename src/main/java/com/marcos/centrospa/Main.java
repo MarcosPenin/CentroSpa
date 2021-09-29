@@ -1,6 +1,8 @@
 package com.marcos.centrospa;
 
+import java.sql.Time;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Scanner;
 import utilidades.ControlData;
 import utilidades.Menu;
@@ -10,6 +12,7 @@ public class Main {
     static Scanner sc = new Scanner(System.in);
     static byte opcion, opcion2, opcion3;
     static Menu miMenu = new Menu(opciones());
+    static Menu menuActividades = new Menu(actividades());
     static Spa spaRelax = new Spa("1", "Relax S.L");
 
     public static void main(String[] args) {
@@ -28,15 +31,19 @@ public class Main {
                 case 1 ->
                     altaSocios();
                 case 2 ->
-                    cambioActividades();
+                    bajaSocios();
                 case 3 ->
-                    calculoCuota();
+                    cambioActividades();
                 case 4 ->
-                    consultaSocios();
+                    añadirUso();
                 case 5 ->
+                    calculoCuota();
+                case 6 ->
+                    consultaSocios();
+                case 7 ->
                     consultaActividades();
             }
-        } while (opcion != 6);
+        } while (opcion != 8);
         sc.close();
     }
 
@@ -58,7 +65,7 @@ public class Main {
         } else {
 
             boolean flag = false;
-            for (int i = 0; i <= spaRelax.getSocios().size(); i++) {
+            for (int i = 0; i < spaRelax.getSocios().size(); i++) {
                 if (codigo.equals(spaRelax.getSocios().get(i).getCodigo())) {
                     flag = true;
                 }
@@ -73,19 +80,37 @@ public class Main {
         }
     }
 
+    static void bajaSocios() {
+        System.out.println("Introduzca el código del socio que desea eliminar");
+        String codigo = ControlData.lerString(sc);
+        boolean flag = false;
+
+        for (int i = 0; i < spaRelax.getSocios().size(); i++) {
+            if (codigo.equals(spaRelax.getSocios().get(i).getCodigo())) {
+                spaRelax.getSocios().remove(i);
+                System.out.println("Se ha eliminado el socio con el código " + codigo);
+                flag = true;
+            }
+        }
+        if (!flag) {
+            System.out.println("Lo siento, no se ha encontrado ningún socio con ese código");
+        }
+
+    }
+
     static void cambioActividades() {
         System.out.println("Introduzca el código del socio que desea modificar");
         String codigo = ControlData.lerString(sc);
 
         for (int i = 0; i <= spaRelax.getSocios().size(); i++) {
-            if (codigo == spaRelax.getSocios().get(i).getCodigo()) {
+            if (codigo.equals(spaRelax.getSocios().get(i).getCodigo())) {
                 System.out.println("¿Qué actividad desea añadir?");
-
-                //Aquí habría que imprimir un menú con las actividades presentes en el ArrayList de Spa, dejando escoger y añadiendo
-                System.out.println("Su actividade se ha añadido con éxito");
-            } else {
-                System.out.println("Lo siento, no hay registrado ningún socio con ese código");;
+                menuActividades.printMenu();
+                opcion = ControlData.lerByte(sc);
+                menuActividades.rango(opcion);
+                spaRelax.getSocios().get(i).añadirActividad(spaRelax.getActividades().get(opcion - 1));
             }
+
         }
     }
 
@@ -110,7 +135,52 @@ public class Main {
         }
     }
 
+    
+    
+    
+    //ESTABA CON ESTO
+    
+    static void añadirUso() {
+
+        System.out.println("Introduzca el código del socio al que desea añadirle un uso ");
+        String codigo = ControlData.lerString(sc);
+        boolean flag = false;
+
+        for (int i = 0; i < spaRelax.getSocios().size(); i++) {
+            if (codigo.equals(spaRelax.getSocios().get(i).getCodigo())) {
+                System.out.println("¿De qué actividad deseas añadir un uso?");
+                menuActividades.printMenu();
+                opcion = ControlData.lerByte(sc);
+                menuActividades.rango(opcion);
+                for(int j=0;j<spaRelax.getSocios().get(i).getActividades().size();i++){
+                    if(opcion == spaRelax.getSocios().get(i).getActividades().get(j).getCodigo()){
+                        System.out.println("Introduzca el año");
+                        System.out.println("Introduzca el mes");
+                        System.out.println("Introduzca el día");
+                        
+                        
+                        
+                        System.out.println("Introduzca la hora de inicio");
+                        System.out.println("Introduzca la hora de fin");
+                        
+                        
+                        flag=true;
+                        
+                        
+                        
+                    }
+                    
+                }
+                    
+            }
+        }
+        if(!flag){
+            System.out.println("Lo siento, para añadir usos primero debe registrar al socio en la actividad");
+        }
+    }
+
     static void consultaSocios() {
+
     }
 
     static void consultaActividades() {
@@ -121,7 +191,9 @@ public class Main {
         ArrayList<String> opciones = new ArrayList<String>() {
             {
                 add("Alta de socios");
-                add("Cambio de actividades");
+                add("Baja de socios");
+                add("Añadir una actividad");
+                add("Añadir un uso");
                 add("Cálculo cuota anual");
                 add("Consultar el listado de socios agregados");
                 add("Consultar el listado de actividades disponibles");
@@ -131,16 +203,32 @@ public class Main {
         return opciones;
     }
 
+    static ArrayList<String> actividades() {
+
+        ArrayList<String> opciones = new ArrayList<String>() {
+            {
+                add("Aparatos");
+                add("Jacuzzi");
+                add("Piscina");
+                add("Yoga");
+                add("Pilates");
+                add("Tenis");
+                add("Padel");
+            }
+        };
+        return opciones;
+    }
+
     static {
-        Actividad aparatos = new Actividad("1", 0);
-        Actividad jacuzzi = new Actividad("1", 0);
-        Actividad piscina = new Actividad("1", 0);
+        Actividad aparatos = new Actividad(1,"libre", 0);
+        Actividad jacuzzi = new Actividad(2,"libre", 0);
+        Actividad piscina = new Actividad(3,"libre", 0);
 
-        Actividad yoga = new Actividad("2", 2);
-        Actividad pilates = new Actividad("2", 2);
+        Actividad yoga = new Actividad(4,"grupo", 2);
+        Actividad pilates = new Actividad(5,"grupo", 2);
 
-        Actividad tenis = new Actividad("3", 3);
-        Actividad padel = new Actividad("3", 3);
+        Actividad tenis = new Actividad(6,"pista", 4);
+        Actividad padel = new Actividad(7,"pista", 4);
 
         ArrayList<Actividad> actividades = new ArrayList();
 
@@ -150,7 +238,7 @@ public class Main {
         actividades.add(yoga);
         actividades.add(pilates);
         actividades.add(tenis);
-        actividades.add(yoga);
+        actividades.add(padel);
 
         Socio socio1 = new Socio("1", "Juan", 30);
         Socio socio2 = new Socio("2", "Ana", 30);
@@ -158,6 +246,20 @@ public class Main {
         Socio socio4 = new Socio("4", "Claudia", 30);
         Socio socio5 = new Socio("5", "Pepe", 30);
         Socio socio6 = new Socio("6", "María", 30);
+
+        Uso uso1 = new Uso(aparatos, new Date(2000, 11, 1), new Time(18, 0, 0), new Time(19, 0, 0));
+        Uso uso2 = new Uso(piscina, new Date(2000, 11, 1), new Time(19, 0, 0), new Time(21, 0, 0));
+        Uso uso3 = new Uso(yoga, new Date(2000, 12, 22), new Time(12, 0, 0), new Time(15, 0, 0));
+        Uso uso4 = new Uso(pilates, new Date(2000, 11, 11), new Time(18, 0, 0), new Time(20, 0, 0));
+        Uso uso5 = new Uso(tenis, new Date(2000, 11, 21), new Time(18, 0, 0), new Time(19, 0, 0));
+        Uso uso6 = new Uso(padel, new Date(2000, 9, 9), new Time(11, 0, 0), new Time(12, 0, 0));
+
+        socio1.añadirUso(uso1);
+        socio1.añadirUso(uso2);
+        socio2.añadirUso(uso3);
+        socio2.añadirUso(uso4);
+        socio3.añadirUso(uso5);
+        socio3.añadirUso(uso6);
 
         ArrayList<Socio> socios = new ArrayList();
 
@@ -171,5 +273,4 @@ public class Main {
         spaRelax.setActividades(actividades);
         spaRelax.setSocios(socios);
     }
-
 }
