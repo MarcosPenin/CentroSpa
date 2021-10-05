@@ -119,13 +119,13 @@ public class Main {
                         flag2 = true;
                     }
                 }
-            }
-            if (!flag2) {
+                if (!flag2) {
                 spaRelax.getSocios().get(i).añadirActividad(spaRelax.getActividades().get(opcion - 1));
                 
                 System.out.println("La actividad se ha añadido con éxito");
-
             }
+            }
+            
             }
             if (!flag) {
                 System.out.println("Lo siento, no se ha encontrado ningún socio con ese código");

@@ -104,7 +104,7 @@ public class Socio {
 
     public float calcularCuotaExtra() {
         float cuotaExtra = 0;
-        if (!this.usos.isEmpty()) {
+        if (this.usos.isEmpty()) {
             cuotaExtra=0;
         } else {
 
