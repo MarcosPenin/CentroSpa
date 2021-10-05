@@ -104,8 +104,13 @@ public class Socio {
 
     public float calcularCuotaExtra() {
         float cuotaExtra = 0;
-        for (int i = 0; i <= this.getUsos().size(); i++) {
-            cuotaExtra += this.getUsos().get(i).calcularImporte();
+        if (!this.usos.isEmpty()) {
+            cuotaExtra=0;
+        } else {
+
+            for (int i = 0; i < this.getUsos().size(); i++) {
+                cuotaExtra += this.getUsos().get(i).calcularImporte();
+            }
         }
         return cuotaExtra;
 
