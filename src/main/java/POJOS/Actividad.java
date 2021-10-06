@@ -1,12 +1,14 @@
 
-package com.marcos.centrospa;
+package POJOS;
 
 public class Actividad {
+    private String nombre;
     private int codigo;
     private String tipo;
     private float cuota;
     
-    public Actividad(int codigo, String tipo, float cuota){        
+    public Actividad(String nombre, int codigo, String tipo, float cuota){        
+        this.nombre=nombre;
         this.codigo=codigo;
         this.tipo=tipo;
         this.cuota=cuota;       
@@ -42,8 +44,10 @@ public class Actividad {
 
     @Override
     public String toString() {
-        return "Actividad{" + "tipo=" + tipo + ", cuota=" + cuota + '}';
+        return "Actividad{" + "nombre=" + nombre + ", codigo=" + codigo + ", tipo=" + tipo + ", cuota=" + cuota + '}';
     }
+
+   
 
     /**
      * @return the codigo
@@ -57,6 +61,20 @@ public class Actividad {
      */
     public void setCodigo(int codigo) {
         this.codigo = codigo;
+    }
+
+    /**
+     * @return the nombre
+     */
+    public String getNombre() {
+        return nombre;
+    }
+
+    /**
+     * @param nombre the nombre to set
+     */
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
     }
 
 }

@@ -1,5 +1,5 @@
 
-package com.marcos.centrospa;
+package POJOS;
 
 import java.util.ArrayList;
 

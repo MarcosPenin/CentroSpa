@@ -1,4 +1,4 @@
-package com.marcos.centrospa;
+package POJOS;
 
 import java.sql.Time;
 import java.util.Date;
@@ -6,6 +6,11 @@ import java.util.Date;
 public class Uso {
 
     private Actividad actividad;
+
+    @Override
+    public String toString() {
+        return "Uso{" + "actividad=" + actividad + ", fecha=" + fecha + ", horaInicio=" + horaInicio + ", horaFin=" + horaFin + ", importeTotal=" + importeTotal + '}';
+    }
     private Date fecha;
     private Time horaInicio;
     private Time horaFin;

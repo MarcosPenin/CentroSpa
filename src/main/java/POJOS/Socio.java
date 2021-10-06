@@ -1,4 +1,4 @@
-package com.marcos.centrospa;
+package POJOS;
 
 import java.util.ArrayList;
 
@@ -118,7 +118,7 @@ public class Socio {
 
     @Override
     public String toString() {
-        return "Socio{" + "codigo=" + codigo + ", nombre=" + nombre + ", cuotaFija=" + cuotaFija + ", cuotaExtra=" + cuotaExtra + ", actividades=" + actividades + ", usos=" + usos + '}';
+        return "Socio{" + "codigo=" + codigo + ", nombre=" + nombre + ", cuotaFija=" + cuotaFija + ", cuotaExtra=" + this.calcularCuotaExtra() + ", actividades=" + actividades + ", usos=" + usos + '}';
     }
 
 }
